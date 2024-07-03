@@ -238,6 +238,52 @@ drift_dolar_deflacion <- function(campos_monetarios) {
 }
 
 #------------------------------------------------------------------------------
+# Drift UVI
+# El valor del UVI del último día de cada mes
+# API: https://www.bcra.gob.ar/BCRAyVos/catalogo-de-APIs-banco-central.asp
+#   Unidad de Vivienda (UVI) (en pesos -con dos decimales-, base 31.3.2016=14.05)
+#   Ejemplo: GET http://api.bcra.gob.ar/estadisticas/v2.0/datosvariable/32/2019-01-01/2019-01-01
+
+drift_uvi <- function(campos_monetarios) {
+  cat( "inicio drift_uvi()\n")
+  
+  vfoto_mes <- c(
+    201901, 201902, 201903, 201904, 201905, 201906,
+    201907, 201908, 201909, 201910, 201911, 201912,
+    202001, 202002, 202003, 202004, 202005, 202006,
+    202007, 202008, 202009, 202010, 202011, 202012,
+    202101, 202102, 202103, 202104, 202105, 202106,
+    202107, 202108, 202109
+  )
+  
+  vUVI <- c(
+    31.500000, 32.210000, 32.640000, #2019
+    33.250000, 34.170000, 35.020000,
+    35.930000, 36.320000, 37.170000,
+    39.360000, 40.710000, 42.680000, 
+    44.080000, 45.130000, 47.410000, #2020
+    48.970000, 49.440000, 49.640000,
+    50.060000, 51.030000, 52.340000,
+    54.010000, 56.000000, 61.040000,
+    67.930000, 70.690000, 74.410000, #2021
+    77.670000, 80.350000, 84.460000,
+    86.450000, 89.100000, 92.040000
+  )
+  
+  tb_UVI <- as.data.table( list( vfoto_mes, vUVI) )
+  
+  colnames( tb_UVI ) <- c( envg$PARAM$dataset_metadata$periodo, "UVI" )
+  
+  dataset[tb_UVI,
+          on = c(envg$PARAM$dataset_metadata$periodo),
+          (campos_monetarios) := .SD / i.UVI, # Divido cada monto por el precio del UVI
+          .SDcols = campos_monetarios
+  ]
+  
+  cat( "fin drift_uvi()\n")
+}
+
+#------------------------------------------------------------------------------
 # deflaciona por IPC
 # momento 1.0  31-dic-2020 a las 23:59
 
@@ -371,7 +417,8 @@ switch(envg$PARAM$metodo,
   "bcra"           = drift_bcra(campos_monetarios),
   "ambito"         = drift_ambito(campos_monetarios),
   "uva"            = drift_uva(campos_monetarios),
-  "dolar_deflacion"= drift_dolar_deflacion(campos_monetarios)
+  "dolar_deflacion"= drift_dolar_deflacion(campos_monetarios),
+  "uvi"            = drift_uvi(campos_monetarios)
 )
 
 
