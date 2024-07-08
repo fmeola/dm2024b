@@ -183,7 +183,8 @@ setorderv(dataset, envg$PARAM$dataset_metadata$primarykey)
 #  estos son los campos que expresan variables monetarias
 campos_monetarios <- colnames(dataset)
 campos_monetarios <- campos_monetarios[campos_monetarios %like%
-  "^(m|Visa_m|Master_m|vm_m)"]
+  # "^(m|Visa_m|Master_m|vm_m)"]
+    "^(m|Visa_m|Master_m|vm_m|tmactpas)"] # Cambio para que aplique a un nuevo campo
 
 # aqui aplico un metodo para atacar el data drifting
 # hay que probar experimentalmente cual funciona mejor

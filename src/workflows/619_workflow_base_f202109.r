@@ -97,8 +97,9 @@ FEintra_base <- function( pinputexps )
   if( -1 == (param_local <- exp_init())$resultado ) return( 0 ) # linea fija
 
 
-  param_local$meta$script <- "/src/wf-etapas/z531_FE_intrames.r"
-
+  # param_local$meta$script <- "/src/wf-etapas/z531_FE_intrames.r"
+  param_local$meta$script <- "/src/wf-etapas/531_FE_intrames.r"
+  
   param_local$semilla <- NULL  # no usa semilla, es deterministico
 
   return( exp_correr_script( param_local ) ) # linea fija
@@ -392,7 +393,7 @@ wf_sept <- function( pnombrewf )
 
   DT_incorporar_dataset_competencia2024()
   CA_catastrophe_base( metodo="MachineLearning")
-  FEintra_base()
+  FEintra_base() # Cambios
   # DR_drifting_base(metodo="rank_cero_fijo")
   DR_drifting_base(metodo="uva")
   FEhist_base()
