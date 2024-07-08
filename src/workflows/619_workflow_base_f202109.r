@@ -112,8 +112,9 @@ DR_drifting_base <- function( pinputexps, metodo)
   if( -1 == (param_local <- exp_init())$resultado ) return( 0 ) # linea fija
 
 
-  param_local$meta$script <- "/src/wf-etapas/z541_DR_corregir_drifting.r"
-
+  # param_local$meta$script <- "/src/wf-etapas/z541_DR_corregir_drifting.r"
+  param_local$meta$script <- "/src/wf-etapas/542_DR_corregir_drifting_GrupoB.r"
+  
   # valores posibles
   #  "ninguno", "rank_simple", "rank_cero_fijo", "deflacion", "estandarizar"
   param_local$metodo <- metodo
@@ -392,7 +393,8 @@ wf_sept <- function( pnombrewf )
   DT_incorporar_dataset_competencia2024()
   CA_catastrophe_base( metodo="MachineLearning")
   FEintra_base()
-  DR_drifting_base(metodo="rank_cero_fijo")
+  # DR_drifting_base(metodo="rank_cero_fijo")
+  DR_drifting_base(metodo="drift_uva")
   FEhist_base()
   FErf_attributes_base()
   #CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
