@@ -135,8 +135,8 @@ FEhist_base <- function( pinputexps)
   param_local$meta$script <- "/src/wf-etapas/z551_FE_historia.r"
 
   param_local$lag1 <- TRUE
-  param_local$lag2 <- TRUE # SI me engraso con los lags de orden 2 # Cambio
-  param_local$lag3 <- TRUE # SI me engraso con los lags de orden 3 # Cambio
+  param_local$lag2 <- FALSE # NO me engraso con los lags de orden 2
+  param_local$lag3 <- FALSE # NO me engraso con los lags de orden 3
 
   # no me engraso las manos con las tendencias
   param_local$Tendencias1$run <- TRUE  # FALSE, no corre nada de lo que sigue
@@ -399,7 +399,7 @@ wf_sept <- function( pnombrewf )
   FEintra_base() # Cambios
   # DR_drifting_base(metodo="rank_cero_fijo")
   DR_drifting_base(metodo="uva")
-  FEhist_base() # Cambios
+  FEhist_base()
   FErf_attributes_base()
   #CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
 
