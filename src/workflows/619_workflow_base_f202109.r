@@ -404,7 +404,7 @@ wf_sept <- function( pnombrewf )
   param_local <- exp_wf_init( pnombrewf ) # linea fija
 
   DT_incorporar_dataset_competencia2024()
-  CA_catastrophe_base( metodo="MachineLearning")
+  CA_catastrophe_base( metodo="Ninguno")
   FEintra_base() # Cambios
   # DR_drifting_base(metodo="rank_cero_fijo")
   DR_drifting_base(metodo="uva")
