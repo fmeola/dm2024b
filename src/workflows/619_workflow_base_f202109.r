@@ -261,17 +261,26 @@ TS_strategy_base9 <- function( pinputexps )
 
   param_local$meta$script <- "/src/wf-etapas/z571_TS_training_strategy.r"
 
-
+  #final train y train con misma cantidad de meses
+  #para que los params de lightgbm se mantengan en los mismos tamaños
+  
   param_local$future <- c(202109)
-  param_local$final_train <- c(202007, 202006, 202105, 202104,
-    202103, 202102, 202101, 202012, 202011)
-
-
-  param_local$train$training <- c(202105, 202104, 202103,
-     202102, 202101, 202012, 202011, 202010, 202009)
-  param_local$train$validation <- c(202106)
-  param_local$train$testing <- c(202107)
-
+  # param_local$final_train <- c(202007, 202006, 202105, 202104,
+  #   202103, 202102, 202101, 202012, 202011)
+  param_local$final_train <- c(202107, 202106, 202105, 202104,
+                               202103, 202102, 202101, 202012,
+                               202011, 202002, 202001, 201912)
+  # param_local$train$training <- c(202105, 202104, 202103,
+  #    202102, 202101, 202012, 202011, 202010, 202009)
+  param_local$train$training <- c(202102, 202101, 202012, 202011,
+                                  202002, 202001, 201912, 202911,
+                                  201910, 201909, 201908, 201907)
+  # param_local$train$validation <- c(202106)
+  param_local$train$validation <- c(202104)
+  # param_local$train$testing <- c(202107)
+  # Grupo A Mas de un mes de train testing da mejores resultados
+  param_local$train$testing <- c(202107, 202106, 202105)
+  
   # Atencion  0.2  de  undersampling de la clase mayoritaria,  los CONTINUA
   # 1.0 significa NO undersampling
   param_local$train$undersampling <- 0.2
@@ -344,7 +353,7 @@ HT_tuning_base <- function( pinputexps, bypass=FALSE)
 
 
   # una Bayesian humilde, pero no descabellada
-  param_local$bo_iteraciones <- 60 # iteraciones de la Optimizacion Bayesiana
+  param_local$bo_iteraciones <- 100 # iteraciones de la Optimizacion Bayesiana
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
