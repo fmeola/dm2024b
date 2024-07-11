@@ -206,11 +206,11 @@ AgregarVariables_IntraMes <- function(dataset) {
   if (nans_qty > 0) {
     cat(
       "ATENCION, hay", nans_qty,
-      "valores NaN 0/0 en tu dataset. Seran pasados arbitrariamente a 0\n"
+      "valores NaN 0/0 en tu dataset. NO Seran pasados arbitrariamente a 0\n"
     )
 
     cat("Si no te gusta la decision, modifica a gusto el programa!\n\n")
-    dataset[mapply(is.nan, dataset)] <<- 0
+    dataset[mapply(is.nan, dataset)] <<- NA
   }
 
   cat( "fin AgregarVariables_IntraMes()\n")
