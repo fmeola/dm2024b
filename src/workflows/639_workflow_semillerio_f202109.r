@@ -347,8 +347,6 @@ HT_tuning_base <- function( pinputexps, bypass=FALSE)
     feature_fraction = c( 0.5, 0.9 ),
     num_leaves = c( 8L, 2048L,  "integer" ),
     min_data_in_leaf = c( 100L, 10000L, "integer" ),
-    
-    min_data_in_leaf = c( 100L, 10000L, "integer" ),
     lambda_l1 = c(0, 600), # Cambio
     lambda_l2 = c(0, 800), # Cambio
     min_gain_to_split = c(0, 50) # Cambio
