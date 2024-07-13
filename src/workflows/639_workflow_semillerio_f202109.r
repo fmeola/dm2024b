@@ -351,7 +351,8 @@ HT_tuning_base <- function( pinputexps, bypass=FALSE)
     # learning_rate = c( 0.02, 0.8 ),
     learning_rate = c( 0.01, 0.8 ),
     # feature_fraction = c( 0.5, 0.9 ),
-    feature_fraction = c( 0.45, 0.9 ),
+    # feature_fraction = c( 0.45, 0.9 ),
+    feature_fraction = c( 0.40, 0.9 ),
     # num_leaves = c( 8L, 2048L,  "integer" ),
     num_leaves = c( 8L, 2100L,  "integer" ),
     # min_data_in_leaf = c( 100L, 10000L, "integer" ),
@@ -359,15 +360,17 @@ HT_tuning_base <- function( pinputexps, bypass=FALSE)
     # lambda_l1 = c(0, 600), # Cambio
     lambda_l1 = c(0, 600), # Cambio
     # lambda_l2 = c(0, 800), # Cambio
-    lambda_l2 = c(0, 800), # Cambio
+    # lambda_l2 = c(0, 800), # Cambio
+    lambda_l2 = c(0, 850), # Cambio
     # min_gain_to_split = c(0, 50) # Cambio
     min_gain_to_split = c(0, 50) # Cambio
   )
 
 
   # una Bayesian humilde, pero no descabellada
-  param_local$bo_iteraciones <- 60 # iteraciones de la Optimizacion Bayesiana
-
+  # param_local$bo_iteraciones <- 60 # iteraciones de la Optimizacion Bayesiana
+  param_local$bo_iteraciones <- 100 # iteraciones de la Optimizacion Bayesiana
+  
   return( exp_correr_script( param_local ) ) # linea fija
 }
 #------------------------------------------------------------------------------
